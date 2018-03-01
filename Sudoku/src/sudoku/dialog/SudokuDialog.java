@@ -78,7 +78,8 @@ public class SudokuDialog extends JFrame {
      */
     private void numberClicked(int number) {
         // WRITE YOUR CODE HERE ...
-        //
+        board.modifyBoard(number);
+        boardPanel.repaint();
         showMessage("Number clicked: " + number);
     }
     
@@ -116,7 +117,8 @@ public class SudokuDialog extends JFrame {
     private void configureUI() {
     	try {
         setIconImage(createImageIcon("sudoku.png").getImage());
-    	}catch(Exception nullPointerExceptino) {
+    	}
+    	catch(Exception nullPointerExceptino) {
     		System.out.println("There was a null pointer exception caught.");
     	}
       

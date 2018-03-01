@@ -28,7 +28,7 @@ package sudoku.model;
 public class Board {
 	
 	public int size;
-	private int[][] puzzle;
+	public int[][] puzzle;
 	public int xpos;
 	public int ypos;
 	
@@ -60,7 +60,7 @@ public class Board {
 		puzzle = new int[size][size];
 		for (int i = 0; i < puzzle.length; i++) {
 			for (int j = 0; j < puzzle[i].length; j++) {
-				puzzle[i][j] = -1; 
+				puzzle[i][j] = 0; 
 			}
 		}
 	}
@@ -88,8 +88,8 @@ public class Board {
 	 * represents the number that will be placed into the array at positions
 	 * x & y.
 	 */
-	public void modifyBoard(int x, int y, int v) {
-		puzzle[x][y] = v;
+	public void modifyBoard(int v) {
+		puzzle[xpos][ypos] = v;
 	}
 	
 	/* 

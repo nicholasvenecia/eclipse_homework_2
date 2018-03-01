@@ -95,20 +95,31 @@ public class BoardPanel extends JPanel {
         g.setColor(boardColor);
        
         
-        for (int i = 0; i <= board.size; i++) {
-        		if (i % Math.sqrt(board.size) == 0) {
-        			g.setColor(Color.black);
+    		g.setColor(Color.magenta);
+    		g.fillRect(squareSize * board.xpos, squareSize * board.ypos, squareSize, squareSize); 
+        
+        	g.setColor(Color.BLACK);
+        for (int i = 0; i < board.size; i++) {
+        		for (int j = 0; j < board.size; j++) {
+        			if (board.puzzle[i][j] == 0) {
+        				g.drawString("", ((squareSize*i) + (squareSize / 2)), ((squareSize*j) + (squareSize / 2)));
+        			}
+        			else {
+        				g.drawString(board.puzzle[i][j]+"", (squareSize*i) + (squareSize / 2), (squareSize*j) + (squareSize / 2));
+        			}
         		}
-        		else {
-        			g.setColor(Color.gray);
-        		}
-        		g.drawLine(0, squareSize * i, board.size * squareSize, squareSize * i);
-        		g.drawLine(squareSize * i, 0, squareSize * i, squareSize * board.size);
         }
         
-        
-        		g.fillRect(squareSize * board.xpos, squareSize * board.ypos, squareSize, squareSize); 
-        
+        for (int i = 0; i <= board.size; i++) {
+    		if (i % Math.sqrt(board.size) == 0) {
+    			g.setColor(Color.black);
+    		}
+    		else {
+    			g.setColor(Color.gray);
+    		}
+    		g.drawLine(0, squareSize * i, board.size * squareSize, squareSize * i);
+    		g.drawLine(squareSize * i, 0, squareSize * i, squareSize * board.size);
+    }
     }
 
 }
