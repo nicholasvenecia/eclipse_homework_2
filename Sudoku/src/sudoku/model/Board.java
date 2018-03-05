@@ -31,7 +31,7 @@ public class Board {
 	public int[][] puzzle;
 	public int xpos;
 	public int ypos;
-	
+	public int value;
 	/*
 	 * The default size of the board will be 4 and makes a call to 
 	 * makeOriginalBoard which will create a 2D array with this given size.
@@ -74,7 +74,7 @@ public class Board {
 	public boolean isSolved() {
 		for (int i = 0; i < puzzle.length; i++) {
 			for (int j = 0; j < puzzle[i].length; j++) {
-				if (puzzle[i][j] == -1) {
+				if (puzzle[i][j] == 0) {
 					return false;
 				}
 			}
@@ -88,43 +88,43 @@ public class Board {
 	 * represents the number that will be placed into the array at positions
 	 * x & y.
 	 */
-	public void modifyBoard(int v) {
-		puzzle[xpos][ypos] = v;
+	public void modifyBoard() {
+		puzzle[xpos][ypos] = value;
 	}
 	
 	/* 
-	 * chekcBoard receives 3 integers (x, y, v) and checks to make sure that
+	 * chekcBoard receives 1 integers (v) and checks to make sure that
 	 * 'v' is not found anywhere in row 'x' nor column 'y'. If 'v' is found in
 	 * either row x or row y then this method will return false otherwise this
 	 * method will return true.
 	 */
-	public boolean checkBoard(int x, int y, int v) {
+	public boolean checkBoard(int v) {
 		// Check rows.
 		for (int i = 0; i < puzzle.length; i++) {
-			if (puzzle[i][y] == v) 
-				return false;	
-		}
-		
-		// Check columns.
-		for (int j = 0; j < puzzle[x].length; j++) {
-			if (puzzle[x][j] == v)
+			if (puzzle[i][xpos] == v)
 				return false;
 		}
-		
+
+		// Check columns.
+		for (int j = 0; j < puzzle[xpos].length; j++) {
+			if (puzzle[xpos][j] == v)
+				return false;
+		}
+
 		// Check surrounding box.
 		double sqrtSize = Math.sqrt(size);
 		int rowCounter = 1;
-		while (x >= sqrtSize * rowCounter) {
+		while (xpos >= sqrtSize * rowCounter) {
 			rowCounter++;
 		}
-		//System.out.println("This is the quadrent for row: " + rowCounter);
-		
+		//System.out.println("This is the quadrant for row: " + rowCounter);
+
 		int colCounter = 1;
-		while (y >= sqrtSize * colCounter) {
+		while (ypos >= sqrtSize * colCounter) {
 			colCounter++;
 		}
-		//System.out.println("This is the quadrent for column: " + colCounter);
-		
+		//System.out.println("This is the quadrant for column: " + colCounter);
+
 		for (int i = (int)(sqrtSize * rowCounter) - 1; i > ((rowCounter * sqrtSize) - sqrtSize) - 1; i--) {
 			for (int j = (int)(sqrtSize * colCounter) - 1; j > ((colCounter * sqrtSize) - sqrtSize) - 1; j--) {
 				//System.out.print("(" + (i) + ", " + (j) + ") ");
@@ -134,30 +134,11 @@ public class Board {
 			}
 			System.out.println();
 		}
-		
+
 		return true;
 	}
 	
-	/*
-	 * printBoard will iterate though the 2D Array and print out all the integer
-	 * values found within the Array that are not -1. Since makeOriginalBoard set
-	 * all the initial values to -1 then all -1 values will be ignored and instead
-	 * of printing a number will print a blank space.
-	 */
-	public void printBoard() {
-		for (int i = 0; i < puzzle.length; i++) {
-			for (int j = 0; j < puzzle[i].length; j++) {
-				if (puzzle[i][j] == -1) {
-					System.out.print(" (" + (i) + ", " + (j) + ") ");
-				}
-				
-				else {
-					System.out.print("   " + puzzle[i][j] + "    ");
-				}
-			}
-			System.out.println("");
-		}
-	}
+
 	
 	/* 
 	 * getSize will return the size of 'int size' to whichever method calls it.
@@ -165,4 +146,67 @@ public class Board {
 	public int size() {
 		return size;
 	}
+
+	public boolean sams(int x, int y, int v) {
+		// Check rows.
+		for (int i = 0; i < puzzle.length; i++) {
+			if (puzzle[i][x] == v)
+				return false;
+		}
+
+		// Check columns.
+		for (int j = 0; j < puzzle[x].length; j++) {
+			if (puzzle[x][j] == v)
+				return false;
+		}
+
+		// Check surrounding box.
+		double sqrtSize = Math.sqrt(size);
+		int rowCounter = 1;
+		while (x >= sqrtSize * rowCounter) {
+			rowCounter++;
+		}
+		//System.out.println("This is the quadrant for row: " + rowCounter);
+
+		int colCounter = 1;
+		while (y >= sqrtSize * colCounter) {
+			colCounter++;
+		}
+		//System.out.println("This is the quadrant for column: " + colCounter);
+
+		for (int i = (int)(sqrtSize * rowCounter) - 1; i > ((rowCounter * sqrtSize) - sqrtSize) - 1; i--) {
+			for (int j = (int)(sqrtSize * colCounter) - 1; j > ((colCounter * sqrtSize) - sqrtSize) - 1; j--) {
+				//System.out.print("(" + (i) + ", " + (j) + ") ");
+				if (puzzle[i][j] == v) {
+					return false;
+				}
+			}
+			System.out.println();
+		}
+
+		return true;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

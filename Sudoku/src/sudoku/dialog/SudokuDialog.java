@@ -69,7 +69,7 @@ public class SudokuDialog extends JFrame {
         board.xpos = x;
         board.ypos = y;
         boardPanel.repaint();
-    	showMessage(String.format("Board clicked: x = %d, y = %d",  x, y));
+    	//showMessage(String.format("Board clicked: x = %d, y = %d",  x, y));
     }
     
     /**
@@ -77,10 +77,30 @@ public class SudokuDialog extends JFrame {
      * @param number Clicked number (1-9), or 0 for "X".
      */
     private void numberClicked(int number) {
-        // WRITE YOUR CODE HERE ...
-        board.modifyBoard(number);
+        //modifies the 2d array.]
+        board.value = number;
+        board.modifyBoard();
+
+        //checks for duplicates
+        if(board.checkBoard(number)){
+            System.out.println("error");
+        }
+
+
+        else if (board.isSolved()){
+            showMessage("Congratulations!!!" );
+
+        }
+
+        else if(board.size < number){
+            showMessage("Conflicting " +"number "+ number+ "!");
+            ///play weird sound method
+        }
+
+        else {
+            showMessage("");
+        }
         boardPanel.repaint();
-        showMessage("Number clicked: " + number);
     }
     
     /**
@@ -101,8 +121,8 @@ public class SudokuDialog extends JFrame {
     	} else {
     		// User clicked NO.
     	}
-    	showMessage("New clicked: " + size);
-        showMessage("New clicked: " + size);
+//    	showMessage("New clicked: " + size);
+//        showMessage("New clicked: " + size);
     }
 
     /**

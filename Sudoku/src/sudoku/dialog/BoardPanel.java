@@ -40,7 +40,9 @@ public class BoardPanel extends JPanel {
     /** Width and height of a square in pixels. */
     private int squareSize;
 
-    /** Create a new board panel to display the given board. */
+    /**
+	 *Create a new board panel to display the given board.
+	 */
     public BoardPanel(Board board, ClickListener listener) {
     		//Graphics g = new Graphics();
         this.board = board;
@@ -73,13 +75,17 @@ public class BoardPanel extends JPanel {
     	}
     	int xx = x / squareSize;
     	int yy = y / squareSize;
+
+//    	//checks if the board is solved
+//    	board.isSolved();
+
     	return xx * 100 + yy;
     }
 
     /** Draw the associated board. */
     @Override
     public void paint(Graphics g) {
-        super.paint(g); 
+        super.paint(g);
 
         // determine the square size
         Dimension dim = getSize();
@@ -101,11 +107,18 @@ public class BoardPanel extends JPanel {
         	g.setColor(Color.BLACK);
         for (int i = 0; i < board.size; i++) {
         		for (int j = 0; j < board.size; j++) {
+        			//we dont print nothing
         			if (board.puzzle[i][j] == 0) {
         				g.drawString("", ((squareSize*i) + (squareSize / 2)), ((squareSize*j) + (squareSize / 2)));
         			}
+
         			else {
+        				//we print the string
+						g.setColor(Color.BLACK);
         				g.drawString(board.puzzle[i][j]+"", (squareSize*i) + (squareSize / 2), (squareSize*j) + (squareSize / 2));
+
+        				//if()
+        				g.setColor(Color.red);
         			}
         		}
         }
