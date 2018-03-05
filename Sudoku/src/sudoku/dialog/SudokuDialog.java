@@ -100,6 +100,7 @@ public class SudokuDialog extends JFrame {
         else {
             showMessage("");
         }
+
         boardPanel.repaint();
 
     }
