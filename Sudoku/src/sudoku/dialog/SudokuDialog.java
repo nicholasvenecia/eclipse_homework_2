@@ -101,6 +101,7 @@ public class SudokuDialog extends JFrame {
             showMessage("");
         }
         boardPanel.repaint();
+
     }
     
     /**
