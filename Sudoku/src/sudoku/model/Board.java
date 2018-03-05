@@ -147,44 +147,8 @@ public class Board {
 		return size;
 	}
 
-	public boolean sams(int x, int y, int v) {
-		// Check rows.
-		for (int i = 0; i < puzzle.length; i++) {
-			if (puzzle[i][x] == v)
-				return false;
-		}
 
-		// Check columns.
-		for (int j = 0; j < puzzle[x].length; j++) {
-			if (puzzle[x][j] == v)
-				return false;
-		}
 
-		// Check surrounding box.
-		double sqrtSize = Math.sqrt(size);
-		int rowCounter = 1;
-		while (x >= sqrtSize * rowCounter) {
-			rowCounter++;
-		}
-		//System.out.println("This is the quadrant for row: " + rowCounter);
-
-		int colCounter = 1;
-		while (y >= sqrtSize * colCounter) {
-			colCounter++;
-		}
-		//System.out.println("This is the quadrant for column: " + colCounter);
-
-		for (int i = (int)(sqrtSize * rowCounter) - 1; i > ((rowCounter * sqrtSize) - sqrtSize) - 1; i--) {
-			for (int j = (int)(sqrtSize * colCounter) - 1; j > ((colCounter * sqrtSize) - sqrtSize) - 1; j--) {
-				//System.out.print("(" + (i) + ", " + (j) + ") ");
-				if (puzzle[i][j] == v) {
-					return false;
-				}
-			}
-			System.out.println();
-		}
-
-		return true;
 	}
 
 
